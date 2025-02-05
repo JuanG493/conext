@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('advertisements', function (Blueprint $table) {
+        Schema::create('challenges', function (Blueprint $table) {
             $table->id();
             $table->string("title");
+            $table->foreignId("creator_id")->constrained("users")->onDelete("cascade");
             $table->longText("description");
-            $table->float("price");
-            $table->string("location");
-            $table->boolean("active");
-            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
+            $table->text("expected")->nullable();
+            $table->integer("level_required")->default(1);
+            $table->enum("status", ["published", "draft", "archived"]);
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('advertisements');
+        Schema::dropIfExists('challenges');
     }
 };

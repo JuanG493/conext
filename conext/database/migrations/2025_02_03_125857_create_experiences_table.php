@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             $table->string("profile_headline");
-            $table->string("type");
+            $table->string("type")->nullable();
             $table->date("start_date");
             $table->date("end_date")->nullable();
-            $table->string("location");
+            $table->string("location")->nullable();
             $table->boolean("is_current_role");
             $table->longText("description");
             $table->timestamps();

@@ -11,13 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('projectsubmissions', function (Blueprint $table) {
-            $table->id();
+        Schema::create('project_user', function (Blueprint $table) {
+            // $table->id();
             $table->foreignId("project_id")->constrained("projects")->onDelete("cascade");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
-            $table->enum("status", ["pending", "approved", "rejected"]);
-            $table->text("feedback");
-            $table->$table->timestamps();
+            $table->enum("status", ["pending", "approved", "rejected"])->default("pending");
+            $table->integer("awarded_experience")->nullable();
+            $table->text("feedback")->nullable();
+            $table->dateTime("submitted_at")->nullable();
+            $table->primary(["project_id", "user_id"]);
+            $table->timestamps();
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projectsubmissions');
+        Schema::dropIfExists('project_user');
     }
 };

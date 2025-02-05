@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->foreignId("creator_id")->constrained("users")->onDelete("cascade");
             $table->string("title");
             $table->longText("description");
-            $table->integer("level_required");
+            $table->integer("level_required")->default(1);
             $table->enum("status", ["published", "draft", "archived"]);
-            $table->integer("experience_reward")->default(0);
             $table->timestamps();
         });
     }

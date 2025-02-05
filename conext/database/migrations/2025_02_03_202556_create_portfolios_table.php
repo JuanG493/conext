@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('expertizas', function (Blueprint $table) {
+        Schema::create('portfolio', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("title");
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
+            $table->text("description");
+            $table->string("url");
+            $table->enum("status", ["active", "pause", "completed"])->default("active");
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('expertizas');
+        Schema::dropIfExists('portfolio');
     }
 };
