@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('proyect_user_skill', function (Blueprint $table) {
+
+        Schema::create('project_user_skill', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("project_id");
-            $table->foreignId("user_id");
-            $table->foreignId("skill_id");
-            $table->integer("points");
+            $table->foreignId('user_id')->constrained("users")->onDelete('cascade');
+            $table->foreignId('project_id')->constrained("projects")->onDelete('cascade');
+            $table->foreignId('skill_id')->constrained("skills")->onDelete('cascade');
+            $table->integer('points')->default(0); // Puntos otorgados en esta habilidad para este proyecto
             $table->timestamps();
 
-            // Clave foránea compuesta para project_user
-            $table->foreign(["project_id", "user_id"])
-                ->references(["project_id", "user_id"])
-                ->on("project_user")
-                ->onDelete("cascade");
+            // Clave foránea compuesta que garantiza que (project_id, user_id) exista en project_user
+            $table->foreign(['project_id', 'user_id'])
+                ->references(['project_id', 'user_id'])
+                ->on('project_user')
+                ->onDelete('cascade');
         });
     }
 

@@ -15,12 +15,12 @@ return new class extends Migration
             // $table->id();
             $table->foreignId("project_id")->constrained("projects")->onDelete("cascade");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
-            $table->enum("status", ["pending", "approved", "rejected"])->default("pending");
-            $table->integer("awarded_experience")->nullable();
+            // $table->enum("status", ["pending", "approved", "rejected"])->default("pending");
+            $table->integer("xp_points")->default(0);
             $table->text("feedback")->nullable();
             $table->dateTime("submitted_at")->nullable();
             $table->primary(["project_id", "user_id"]);
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

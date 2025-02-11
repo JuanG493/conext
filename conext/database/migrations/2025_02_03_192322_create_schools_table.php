@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("location");
-            $table->string("website");
+            $table->string("location")->nullable();
+            $table->string("website")->nullable();
+            $table->foreignId("educationdetails_id")->constrained("educationdetails")->onDelete("cascade");
             // $table->timestamps();
         });
     }

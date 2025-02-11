@@ -13,23 +13,17 @@ return new class extends Migration
     {
         Schema::create('challenge_user_skill', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("challenge_id");
-            $table->foreignId("user_id");
-            $table->foreignId("skill_id");
-            $table->integer("points");
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('challenge_id')->constrained()->onDelete('cascade');
+            $table->foreignId('skill_id')->constrained()->onDelete('cascade');
+            $table->integer('puntos')->default(0); // Puntos otorgados en esta habilidad por el reto
             $table->timestamps();
 
-            // 1. Clave foránea compuesta hacia challenge_user
-            $table->foreign(["challenge_id", "user_id"])
-                ->references(["challenge_id", "user_id"])
-                ->on("challenge_user")
-                ->onDelete("cascade");
-
-            // 2. Clave foránea hacia la tabla skills
-            $table->foreign("skill_id")
-                ->references("id")
-                ->on("skills")
-                ->onDelete("cascade");
+            // Clave foránea compuesta para asegurar que (challenge_id, user_id) exista en challenge_user
+            $table->foreign(['challenge_id', 'user_id'])
+                ->references(['challenge_id', 'user_id'])
+                ->on('challenge_user')
+                ->onDelete('cascade');
         });
     }
 

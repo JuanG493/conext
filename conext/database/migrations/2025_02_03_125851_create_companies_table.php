@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string("company_name", 100);
             $table->string("company_website", 100);
             $table->longText("about_company");
-            $table->timestamps();
+            $table->foreignId("experience_id")->constrained("experiences")->onDelete("cascade");
+            // $table->timestamps();
         });
     }
 

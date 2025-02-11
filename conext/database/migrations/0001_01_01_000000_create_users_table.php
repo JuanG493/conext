@@ -18,13 +18,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string("phone_number");
             $table->boolean("phone_visibility")->default(false);
-            $table->string("website", 200)->default(false);
+            $table->string("website", 200)->nullable();
             $table->boolean("website_visibility", 200)->default(false);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer("level")->default(0);
             $table->integer("total_experience")->default(0);
             $table->rememberToken();
+            $table->foreignId("level_id")->constrained("levels")->onDelete("cascade");
             $table->timestamps();
         });
 

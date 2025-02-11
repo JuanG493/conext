@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->foreignId("skill_id")->constrained("skills")->onDelete("cascade");
             $table->primary(["user_id", "skill_id"]);
-            $table->integer("total_points");
+            $table->integer("total_points")->default(0);
         });
     }
 
