@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Skill extends Model
 {
+    use HasFactory;
+    public $timestamps = false;
     public function projectUsers()
     {
         return $this->belongsToMany(ProjectUser::class, 'project_user_skill')

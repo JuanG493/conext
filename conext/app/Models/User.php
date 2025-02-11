@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
     public function educaciones()
     {
-        return $this->hasMany(Education::class);
+        return $this->hasMany(EducationDetail::class);
     }
     public function portfolios()
     {

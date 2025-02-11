@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('challenge_id')->constrained()->onDelete('cascade');
             $table->foreignId('skill_id')->constrained()->onDelete('cascade');
             $table->integer('puntos')->default(0); // Puntos otorgados en esta habilidad por el reto
-            $table->timestamps();
+            // $table->timestamps();
 
             // Clave foránea compuesta para asegurar que (challenge_id, user_id) exista en challenge_user
             $table->foreign(['challenge_id', 'user_id'])

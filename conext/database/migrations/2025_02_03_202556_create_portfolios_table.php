@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text("description");
             $table->string("url");
             $table->enum("status", ["active", "pause", "completed"])->default("active");
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

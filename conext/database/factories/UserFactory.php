@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Level;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,12 +24,27 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        // return [
+        //     'name' => fake()->name(),
+        //     'email' => fake()->unique()->safeEmail(),
+        //     'email_verified_at' => now(),
+        //     'password' => static::$password ??= Hash::make('password'),
+        //     'remember_token' => Str::random(10),
+        // ];
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'name' => $this->faker->firstName,
+            'last_name' => $this->faker->lastName,
+            'email' => $this->faker->unique()->safeEmail,
+            'phone_number' => $this->faker->phoneNumber,
+            'website' => $this->faker->url,
+            'website_visibility' => $this->faker->boolean,
             'email_verified_at' => now(),
-            'password' => static::$password ??= Hash::make('password'),
+            'profile_picture' => $this->faker->imageUrl(200, 200, 'people'),
+            'level_id' => Level::factory(),
+            'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 
@@ -37,7 +53,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }

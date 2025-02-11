@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer("level");
             $table->integer("experience_required");
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class School extends Model
 {
+    use HasFactory;
+    public $timestamps = false;
     public function educacion()
     {
-        return $this->belongsTo(Education::class);
+        return $this->belongsTo(EducationDetail::class);
     }
 }

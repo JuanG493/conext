@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text("feedback")->nullable();
             // $table->dateTime("submitted_at")->nullable();
             $table->primary(["challenge_id", "user_id"]); //asi un usuario solo puede una vez a un reto
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

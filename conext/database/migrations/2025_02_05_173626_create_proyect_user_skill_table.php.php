@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('project_id')->constrained("projects")->onDelete('cascade');
             $table->foreignId('skill_id')->constrained("skills")->onDelete('cascade');
             $table->integer('points')->default(0); // Puntos otorgados en esta habilidad para este proyecto
-            $table->timestamps();
+            // $table->timestamps();
 
             // Clave foránea compuesta que garantiza que (project_id, user_id) exista en project_user
             $table->foreign(['project_id', 'user_id'])
