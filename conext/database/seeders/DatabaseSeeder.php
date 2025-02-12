@@ -29,10 +29,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
         $this->call([
             SkillSeeder::class,
             LevelSeeder::class,
@@ -40,19 +36,43 @@ class DatabaseSeeder extends Seeder
             SchoolSeeder::class,
         ]);
 
+        User::factory()->create()->create([
+            "role" => "admin",
+            "name" => "admin",
+            "last_name" => "admin",
+            "password" => "admin123",
+            "email" => "admin@admin",
+            "level_id" => 10
+        ]);
+
+        User::factory()->count(5)->create([
+            "role" => "company",
+            "level_id" => 10,
+        ]);
+
+
 
 
         $users = User::factory()->count(5)->create()->each(
             function ($user) {
+                $skills = Skill::all();
+                // Generar asignaciones de skills con total_points
+                $skillData = $skills->random(rand(1, 5))->mapWithKeys(function ($skill) {
+                    return [$skill->id => ['total_points' => rand(1, 100)]];
+                });
+
+                // Asignar las habilidades con los puntos
+                $user->skills()->attach($skillData);
+
                 Blog::factory()->count(2)->create([
                     "user_id" => $user->id
                 ]);
-                $experience = Experience::factory()->count(random_int(1, 5))
+                Experience::factory()->count(random_int(1, 5))
                     ->create([
                         "user_id" => $user->id,
                         "company_id" => Company::inRandomOrder()->value('id'),
                     ]);
-                $educationDetail = EducationDetail::factory()->count(random_int(1, 3))
+                EducationDetail::factory()->count(random_int(1, 3))
                     ->create([
                         "school_id" => School::inRandomOrder()->value('id'),
                     ]);
@@ -64,6 +84,7 @@ class DatabaseSeeder extends Seeder
                         "post_id" => $post->id
                     ]);
                 });
+                Portfolio::factory()->count(2)->create(["user_id" => $user->id]);
             }
         );
 
@@ -77,6 +98,9 @@ class DatabaseSeeder extends Seeder
                 ]);
             }
         });
+
+        $userEmpresa = User::where("role", "company")->each();
+        $this->command->info("hoasdfoasjdf");
 
 
 

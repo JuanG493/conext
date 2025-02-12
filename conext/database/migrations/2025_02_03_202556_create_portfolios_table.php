@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('portfolio', function (Blueprint $table) {
+        Schema::create('portfolios', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
+            $table->text("title");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->text("description");
-            $table->string("url");
-            $table->enum("status", ["active", "pause", "completed"])->default("active");
+            $table->string("repositorio");
+            $table->enum("status", ["active", "paused", "completed"])->default("active");
             // $table->timestamps();
         });
     }

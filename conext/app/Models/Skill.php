@@ -9,6 +9,7 @@ class Skill extends Model
 {
     use HasFactory;
     public $timestamps = false;
+
     public function projectUsers()
     {
         return $this->belongsToMany(ProjectUser::class, 'project_user_skill')
@@ -20,5 +21,9 @@ class Skill extends Model
         return $this->belongsToMany(ChallengeUser::class, 'challenge_user_skill')
             ->withPivot('points')
             ->withTimestamps();
+    }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, "skill_user");
     }
 }

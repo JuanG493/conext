@@ -18,13 +18,13 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->sentence,
             'creator_id' => User::factory(),
+            'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
             'level_required' => $this->faker->numberBetween(1, 10),
             'status' => $this->faker->randomElement(['published', 'draft', 'archived']),
-            'created_at' => now(),
-            'updated_at' => now(),
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
         ];
     }
 }

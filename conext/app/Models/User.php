@@ -91,4 +91,8 @@ class User extends Authenticatable
             ->withPivot(['status', 'awarded_experience', 'feedback', 'submitted_at'])
             ->withTimestamps();
     }
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class, "skill_user");
+    }
 }

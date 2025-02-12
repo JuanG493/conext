@@ -9,6 +9,7 @@ class Portfolio extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $table = "portfolios";
     public function usuario()
     {
         return $this->belongsTo(User::class);

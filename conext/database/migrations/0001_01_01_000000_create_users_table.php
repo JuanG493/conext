@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('email')->unique();
-            $table->string("phone_number");
+            $table->string("phone_number")->nullable();
             $table->boolean("phone_visibility")->default(false);
             $table->string("website", 200)->nullable();
             $table->boolean("website_visibility", 200)->default(false);
@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer("total_experience")->default(0);
             $table->string("profile_picture")->nullable();
             $table->rememberToken();
+            $table->enum('role', ['admin', 'user', 'company'])->default('user');
             $table->foreignId("level_id")->constrained("levels")->onDelete("cascade");
             $table->timestamps();
         });
