@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    public function users()
+    protected $fillable = ['creator_id', 'title', 'description', 'level_required', 'status'];
+
+    public function creator()
     {
-        return $this->belongsToMany(User::class, 'project_user')
-            ->withPivot(['status', 'awarded_experience', 'feedback', 'submitted_at'])
-            ->withTimestamps();
+        return $this->belongsTo(User::class, 'creator_id');
+    }
+
+    public function submissions()
+    {
+        return $this->hasMany(Submission::class);
     }
 }

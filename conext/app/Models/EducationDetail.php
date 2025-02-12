@@ -10,11 +10,11 @@ class EducationDetail extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = "educationdetails";
-    public function usuario()
+    public function user()
     {
         return $this->belongsTo(User::class);
     }
-    public function instituciones()
+    public function school()
     {
         return $this->belongsTo(School::class);
     }

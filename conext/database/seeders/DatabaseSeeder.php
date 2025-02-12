@@ -13,10 +13,13 @@ use App\Models\Level;
 use App\Models\Portfolio;
 use App\Models\Post;
 use App\Models\Project;
+use App\Models\Qualification;
 use App\Models\School;
 use App\Models\Skill;
+use App\Models\Submission;
 use App\Models\User;
 use Database\Factories\LevelFactory;
+use Database\Factories\SubmissionFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -53,7 +56,7 @@ class DatabaseSeeder extends Seeder
 
 
 
-        $users = User::factory()->count(5)->create()->each(
+        $users = User::factory()->count(10)->create()->each(
             function ($user) {
                 $skills = Skill::all();
                 // Generar asignaciones de skills con total_points
@@ -99,47 +102,20 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        $userEmpresa = User::where("role", "company")->each();
-        $this->command->info("hoasdfoasjdf");
+        $userEmpresa = User::where("role", "company")->lazy()->each(function ($e) {
+            Project::factory()->count(rand(1, 5))->create(["creator_id" => $e->id]);
+        });
+        Submission::factory()->count(rand(10, 20))->create();
+        // Qualification::factory()->count(10)->create();
 
+        Qualification::factory()->count(10)->create()->each(function ($q) {
+            // $q->skills()->attach(Skill::inRandomOrder()->value('id'), ["points" => rand(5, 20)]);
+            $skills = Skill::inRandomOrder()->take(rand(2, 5))->pluck('id');
 
-
-
-        // // Crear habilidades
-        // $skills = Skill::factory()->count(5)->create();
-
-        // // Crear retos y proyectos
-        // $challenges = Challenge::factory()->count(5)->create();
-        // $projects = Project::factory()->count(5)->create();
-
-        // // Asignar usuarios a retos y proyectos
-        // foreach ($users as $user) {
-        //     $user->challenges()->attach(
-        //         $challenges->random(rand(1, 3))->pluck('id'),
-        //         ['xp_points' => rand(10, 500), 'feedback' => 'Buen desempeño']
-        //     );
-
-        //     $user->projects()->attach(
-        //         $projects->random(rand(1, 3))->pluck('id'),
-        //         ['xp_points' => rand(10, 500), 'feedback' => 'Proyecto exitoso']
-        //     );
-
-        //     // Asignar habilidades a retos y proyectos
-        //     foreach ($user->challenges as $challenge) {
-        //         \App\Models\ChallengeUserSkill::factory()->create([
-        //             'user_id' => $user->id,
-        //             'challenge_id' => $challenge->id,
-        //             'skill_id' => $skills->random()->id,
-        //         ]);
-        //     }
-
-        //     foreach ($user->projects as $project) {
-        //         \App\Models\ProjectUserSkill::factory()->create([
-        //             'user_id' => $user->id,
-        //             'project_id' => $project->id,
-        //             'skill_id' => $skills->random()->id,
-        //         ]);
-        //     }
-        // }
+            // Asociar las habilidades seleccionadas a la calificación
+            foreach ($skills as $skillId) {
+                $q->skills()->attach($skillId, ['points' => rand(5, 20)]);
+            }
+        });
     }
 }

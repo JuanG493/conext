@@ -11,7 +11,7 @@ class Company extends Model
     protected $table = "companies";
     public $timestamps = false;
     //
-    public function Experience()
+    public function experiences()
     {
         return $this->hasMany(Experience::class);
     }

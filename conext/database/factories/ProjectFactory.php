@@ -23,6 +23,7 @@ class ProjectFactory extends Factory
             'description' => $this->faker->paragraph,
             'level_required' => $this->faker->numberBetween(1, 10),
             'status' => $this->faker->randomElement(['published', 'draft', 'archived']),
+
             // 'created_at' => now(),
             // 'updated_at' => now(),
         ];

@@ -9,7 +9,7 @@ class Level extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    public function usuarios()
+    public function user()
     {
         return $this->hasMany(User::class);
     }

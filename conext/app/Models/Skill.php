@@ -9,21 +9,17 @@ class Skill extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = ['name'];
 
-    public function projectUsers()
-    {
-        return $this->belongsToMany(ProjectUser::class, 'project_user_skill')
-            ->withPivot('points')
-            ->withTimestamps();
-    }
-    public function challengeUsers()
-    {
-        return $this->belongsToMany(ChallengeUser::class, 'challenge_user_skill')
-            ->withPivot('points')
-            ->withTimestamps();
-    }
     public function users()
     {
-        return $this->belongsToMany(User::class, "skill_user");
+        return $this->belongsToMany(User::class, 'skill_user')
+            ->withPivot('total_points');
+    }
+
+    public function qualifications()
+    {
+        return $this->belongsToMany(Qualification::class, 'qualification_skill')
+            ->withPivot('points');
     }
 }

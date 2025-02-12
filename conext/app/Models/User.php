@@ -46,24 +46,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function post()
+    public function posts()
     {
         return $this->hasMany(Post::class);
     }
-    public function siguiendo()
+    public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'followed_by', 'following');
     }
 
-    public function seguidores()
+    public function following()
     {
         return $this->belongsToMany(User::class, 'followers', 'following', 'followed_by');
     }
-    public function experiencias()
+    public function experiences()
     {
         return $this->hasMany(Experience::class);
     }
-    public function educaciones()
+    public function educationDetails()
     {
         return $this->hasMany(EducationDetail::class);
     }
@@ -75,24 +75,30 @@ class User extends Authenticatable
     {
         return $this->hasMany(Blog::class);
     }
-    public function nivel()
+    public function level()
     {
         return $this->belongsTo(Level::class);
     }
-    public function proyectos()
+
+    public function projects()
     {
-        return $this->belongsToMany(Project::class, 'project_user')
-            ->withPivot(['status', 'awarded_experience', 'feedback', 'submitted_at'])
-            ->withTimestamps();
+        return $this->hasMany(Project::class, 'creator_id');
     }
-    public function desafios()
+
+    public function submissions()
     {
-        return $this->belongsToMany(Challenge::class, 'challenge_user')
-            ->withPivot(['status', 'awarded_experience', 'feedback', 'submitted_at'])
-            ->withTimestamps();
+        return $this->hasMany(Submission::class);
     }
+
+    public function qualifications()
+    {
+        return $this->hasMany(Qualification::class, 'user_id');
+    }
+
     public function skills()
     {
-        return $this->belongsToMany(Skill::class, "skill_user");
+        return $this->belongsToMany(Skill::class, 'skill_user')
+            ->withPivot('total_points');
+        // ->withTimestamps();
     }
 }
