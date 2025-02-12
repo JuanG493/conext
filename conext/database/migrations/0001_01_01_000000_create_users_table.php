@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer("total_experience")->default(0);
+            $table->string("profile_picture")->nullable();
             $table->rememberToken();
             $table->foreignId("level_id")->constrained("levels")->onDelete("cascade");
             $table->timestamps();

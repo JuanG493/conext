@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("name");
             $table->string("location")->nullable();
             $table->string("website")->nullable();
-            $table->foreignId("educationdetails_id")->constrained("educationdetails")->onDelete("cascade");
+            // $table->foreignId("educationdetails_id")->constrained("educationdetails")->onDelete("cascade");
             // $table->timestamps();
         });
     }

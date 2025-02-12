@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ChallengeUser extends Model
+class ChallengeUserSkill extends Model
 {
     public function habilidades()
     {

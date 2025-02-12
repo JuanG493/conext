@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 //
-class ProjectUser extends Model
+class ProjectUserSkill extends Model
 {
     public function habilidades()
     {

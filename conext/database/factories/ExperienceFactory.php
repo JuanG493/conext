@@ -19,13 +19,12 @@ class ExperienceFactory extends Factory
     {
         return [
             'job_headline' => $this->faker->jobTitle,
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->optional()->date(),
-            'is_current_role' => $this->faker->boolean(),
+            'type' => $this->faker->randomElement(['Full-time', 'Part-time', 'Contract']),
+            'start_date' => $this->faker->date,
+            'end_date' => $this->faker->optional()->date,
+            'location' => $this->faker->city,
+            'is_current_role' => $this->faker->boolean,
             'description' => $this->faker->paragraph,
-            'user_id' => User::factory(),
-            // 'created_at' => now(),
-            // 'updated_at' => now(),
         ];
     }
 }

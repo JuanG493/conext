@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("slug");
             $table->longText("content");
-            $table->text("sample");
+            $table->text("sample")->nullable();
             $table->enum("status", ["published", "draft", "archived"]);
             $table->timestamps();
         });

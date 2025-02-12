@@ -23,6 +23,8 @@ class EducationDetailFactory extends Factory
             'grade' => $this->faker->word,
             'description' => $this->faker->paragraph,
             'user_id' => User::factory(),
+            // 'start-data' => $this->faker->date(),
+            // 'start-data' => $this->faker->date(),
             // 'created_at' => now(),
             // 'updated_at' => now(),
         ];

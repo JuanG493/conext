@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->string("profile_headline");
+            $table->string("job_headline");
             $table->string("type")->nullable();
             $table->date("start_date");
             $table->date("end_date")->nullable();
@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean("is_current_role");
             $table->longText("description");
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('company_id')->constrained('companies')->onDelete('cascade');
             // $table->timestamps();
         });
     }
