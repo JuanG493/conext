@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('last_name')->nullable();
+            $table->string("username")->unique()->nullable();
+            $table->string("slug")->unique()->nullable();
             $table->string('email')->unique();
             $table->string("phone_number")->nullable();
             $table->boolean("phone_visibility")->default(false);
@@ -25,7 +27,6 @@ return new class extends Migration
             $table->integer("total_experience")->default(0);
             $table->string("profile_picture")->nullable();
             $table->rememberToken();
-            $table->enum('role', ['admin', 'user', 'company'])->default('user');
             $table->foreignId("level_id")->constrained("levels")->onDelete("cascade");
             $table->timestamps();
         });

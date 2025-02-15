@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Company;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class Companyseeder extends Seeder
 {
@@ -67,6 +69,7 @@ class Companyseeder extends Seeder
         ];
 
         foreach ($companies as $company) {
+            $company["slug"] = Str::slug($company["company_name"]);
             Company::create($company);
         }
     }

@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Skill;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use phpDocumentor\Reflection\PseudoTypes\LowercaseString;
 
 class SkillSeeder extends Seeder
 {
@@ -13,6 +15,7 @@ class SkillSeeder extends Seeder
      */
     public function run(): void
     {
+
         $skills = [
             'JavaScript',
             'Python',
@@ -83,11 +86,67 @@ class SkillSeeder extends Seeder
             'CI/CD',
             'Scrum',
             'Agile',
-            'Design Patterns'
+            'Design Patterns',
+            "Version Control",
+            "Database Management",
+            "Debugging",
+            "Test-Driven Development (TDD)",
+            "Continuous Integration/Continuous Deployment (CI/CD)",
+            "Agile Methodology",
+            "Cloud Computing",
+            "API Design and Development",
+            "Unit Testing",
+            "Object-Oriented Programming (OOP)",
+            "Data Structures and Algorithms",
+            "Software Architecture",
+            "Code Optimization",
+            "Security Best Practices",
+            "Responsive Web Design",
+            "Containerization",
+            "DevOps",
+            "Microservices Architecture",
+            "Container Orchestration",
+            "Performance Monitoring",
+            "Cross-browser Compatibility",
+            "Mobile App Development",
+            "UX/UI Design",
+            "Machine Learning/Artificial Intelligence",
+            "Data Analysis",
+            "Data Visualization",
+            "CI/CD Pipelines",
+            "Web Scraping",
+            "Server Management",
+            "Cloud Security",
+            "Big Data Processing",
+            "Blockchain Technology",
+            "Serverless Architecture",
+            "Virtualization",
+            "Networking Basics",
+            "Load Balancing",
+            "Versioning and Release Management",
+            "SaaS Development",
+            "Cross-Platform Development",
+            "Debugging Tools",
+            "Software Testing Frameworks",
+            "Functional Programming",
+            "Incident Management",
+            "Containerized Environments",
+            "API Testing",
+            "Microfrontend Architecture",
+            "Automated Deployment",
+            "Server-Side Rendering (SSR)",
+            "Cloud Storage Management",
+            "Web Performance Optimization",
+            "Real-Time Data Processing",
+            "Business Process Automation",
+            "Site Reliability Engineering (SRE)"
         ];
 
         foreach ($skills as $skill) {
-            Skill::create(['name' => $skill]);
+            Skill::create([
+                'name' => strtolower($skill),
+                // 'slug' => Str::slug($skill, '-')
+            ]);
         }
     }
 }

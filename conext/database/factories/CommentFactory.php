@@ -20,7 +20,7 @@ class CommentFactory extends Factory
     {
         return [
             'post_id' => Post::factory(),
-            // 'user_id' => User::factory(),
+            'user_id' => User::factory(),
             'description' => $this->faker->paragraph,
             // 'created_at' => now(),
             // 'updated_at' => now(),

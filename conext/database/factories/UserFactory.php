@@ -31,9 +31,13 @@ class UserFactory extends Factory
         //     'password' => static::$password ??= Hash::make('password'),
         //     'remember_token' => Str::random(10),
         // ];
+
+        $userName = $this->faker->userName();
         return [
-            'name' => $this->faker->firstName,
+            'name' => $this->faker->name(),
             'last_name' => $this->faker->lastName,
+            "username"  => $userName,
+            'slug' => Str::slug($userName),
             'email' => $this->faker->unique()->safeEmail,
             'phone_number' => $this->faker->phoneNumber,
             'phone_visibility' => $this->faker->boolean,

@@ -1,3 +1,13 @@
 *todos los usuarios con el rol de usuario ordenados por nivel
-* cinco usuarios de mas experiencia
+* ranking usuarios de mas experiencia
 * los usuarios que son empresas con sus proyectos
+* buscar ususario por nombre
+* buscar empresas por nombre
+* usuarios por nivel
+* projectos y algunas estadisticas
+        => cuantos de cada nivel
+        => ordenados por fechas (cambiar fechas)
+
+* proyectos ordenados por nivel
+* proyectos que estan publicados, agrupados por empresas €
+* las envios-respuestas de un proyecto

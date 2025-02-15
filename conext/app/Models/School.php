@@ -13,4 +13,8 @@ class School extends Model
     {
         return $this->belongsTo(EducationDetail::class);
     }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

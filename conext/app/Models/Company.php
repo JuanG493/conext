@@ -15,4 +15,8 @@ class Company extends Model
     {
         return $this->hasMany(Experience::class);
     }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

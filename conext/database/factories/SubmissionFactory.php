@@ -24,7 +24,7 @@ class SubmissionFactory extends Factory
             'solution_text' => $this->faker->paragraph(),
             'solution_path' => $this->faker->boolean(70) ? $this->faker->filePath() : null,
             'submitted_at' => now(),
-            'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
+            // 'status' => $this->faker->randomElement(['pending', 'approved', 'rejected']),
         ];
     }
 }

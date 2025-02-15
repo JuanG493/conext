@@ -18,14 +18,15 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'last_name' => $this->last_name,
+            "username" => $this->username,
             'email' => $this->email,
             'number' => $this->phone_number,
             'url' => $this->website,
             'level' => $this->whenLoaded('level', function () {
                 return  $this->level->id;
             }),
-            'level experience' => $this->total_experience,
-            'experience left' => $this->whenLoaded('level', function () {
+            'level_experience' => $this->total_experience,
+            'experience_left' => $this->whenLoaded('level', function () {
                 return  $this->level->experience_required - $this->total_experience;
             }),
 

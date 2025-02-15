@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\School;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class SchoolSeeder extends Seeder
 {
@@ -37,6 +39,7 @@ class SchoolSeeder extends Seeder
         ];
 
         foreach ($schools as $school) {
+            $school["slug"] = Str::slug($school["name"]);
             School::create($school);
         }
     }

@@ -99,6 +99,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'skill_user')
             ->withPivot('total_points');
-        // ->withTimestamps();
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

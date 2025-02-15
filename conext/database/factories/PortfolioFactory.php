@@ -21,7 +21,7 @@ class PortfolioFactory extends Factory
             'title' => $this->faker->sentence,
             'user_id' => User::factory(),
             'description' => $this->faker->paragraph,
-            'repositorio' => $this->faker->url(),
+            'repository' => $this->faker->url(),
             'status' => $this->faker->randomElement(['active', 'paused', 'completed']),
             // 'created_at' => now(),
             // 'updated_at' => now(),

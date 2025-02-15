@@ -9,7 +9,7 @@ class Skill extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
     public function users()
     {
@@ -22,4 +22,8 @@ class Skill extends Model
         return $this->belongsToMany(Qualification::class, 'qualification_skill')
             ->withPivot('points');
     }
+    // public function getRouteKeyName()
+    // {
+    //     return 'slug';
+    // }
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->text("title");
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->text("description");
-            $table->string("repositorio");
+            $table->string("repository");
             $table->enum("status", ["active", "paused", "completed"])->default("active");
             // $table->timestamps();
         });
