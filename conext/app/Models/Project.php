@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-    protected $fillable = ['creator_id', 'title', 'description', 'level_required', 'status'];
+    protected $fillable = ['creator_id', 'slug', 'title', 'description', 'level_required', 'status'];
 
     public function creator()
     {

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug')->unique()->nullable();
             $table->longText("description");
             $table->integer("level_required")->default(1);
-            $table->enum("status", ["published", "draft", "archived"]);
+            $table->enum("status", ["published", "draft", "archived"])->default("draft");
             $table->timestamps();
         });
     }

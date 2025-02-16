@@ -14,12 +14,13 @@ class ProjectResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-
         return [
-            "creator" => $this->first()->creator->name,
-            "id" => $this->first()->creator->id,
-            "total_projects" => $this->count(),
-            "projects" => $this->map->only(["id", "name", "title", "description", "level_required"])
+            'creator' => $this->whenLoaded("creator", fn() => $this->creator->name),
+            'title' => $this->title,
+            'slug' => $this->slug,
+            'description' => $this->description,
+            'level_required' => $this->level_required,
+            'status' => $this->status,
         ];
     }
 }
