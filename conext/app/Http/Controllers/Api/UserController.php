@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\CompanyUserCollection;
 use App\Http\Resources\LevelUserCollection;
 use App\Http\Resources\LevelUserResource;
@@ -18,12 +20,10 @@ use App\Models\Project;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::role('user')
@@ -85,17 +85,19 @@ class UserController extends Controller
         return new SchoolUserCollection($users);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request) {}
+    public function store(CreateUserRequest $request)
+    {
+        $data = $request->validated();
+        $data["slug"]  = Str::slug($request->username);
+        $data["password"] = bcrypt($request->password);
+        $data["level_id"] = 1;
+        $user = User::create($data);
+        $user->load("level");
+        return new UserResource($user);
+    }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(User $user)
     {
-
         $user->load(
             "educationdetails",
             "followers",
@@ -105,23 +107,23 @@ class UserController extends Controller
             "experiences",
             "skills"
         );
-        // dd($user->educationDetails);
         return new UserDatailResource($user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $data = $request->validated();
+        if ($request->username) {
+            $data["slug"] = $request->username;
+        }
+        $user->update($data);
+        return new UserDatailResource($user);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return response()->json(["El usuario ha eliminado exitosamente"], 200);
     }
 }

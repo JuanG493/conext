@@ -27,6 +27,5 @@ Route::get('/projects/level/{level}', [ProjectController::class, "projectsByLeve
 Route::get('/projects/group-by-creator/', [ProjectController::class, "projectsGroupByCreator"]);
 Route::apiResource('/projects', ProjectController::class);
 
-// Route::apiResource('/projects', ProjectController::class);
 Route::apiResource('/submissions', SubmissionController::class)->except("index");
 Route::apiResource('/qualifications', QualificationController::class)->except("index");

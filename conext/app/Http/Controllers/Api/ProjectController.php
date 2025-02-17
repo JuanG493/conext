@@ -65,6 +65,6 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         $project->delete();
-        return response()->json(["El proyecto de ha eliminado exitosamente"], 200);
+        return response()->json(["El proyecto se ha eliminado exitosamente"], 200);
     }
 }
